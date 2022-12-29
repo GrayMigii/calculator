@@ -1,3 +1,5 @@
+let state;
+
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
@@ -18,5 +20,21 @@ const populateDisplay = () => {
     });
     
 };
+
+const calculate = (state, a, b) => {
+    switch (state) {
+        case 'addition':
+            return operate(add, a, b);
+            break;
+        case 'subtraction':
+            return operate(subtract, a, b);
+            break;
+        case 'multiplication':
+            return operate(multiply, a, b);
+            break;
+        case 'division':
+            return operate(divide, a, b);
+    }
+}
 
 populateDisplay();
