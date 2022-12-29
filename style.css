@@ -1,0 +1,25 @@
+.digits-container > *{
+    display: flex;
+}
+
+.do-container{
+    display: flex;
+}
+
+.operators-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.functions-container{
+    display: flex;
+}
+
+.display{
+    height: 50px;
+    border: red solid 1px;
+}
+
+.main-container {
+    width: 500px;
+}
