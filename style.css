@@ -1,25 +1,76 @@
+* {
+    font-weight: bold;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+}
+
 .digits-container > *{
     display: flex;
+    gap: 2px;
 }
 
 .do-container{
     display: flex;
+    gap: 2px;
 }
 
 .operators-container{
     display: flex;
     flex-direction: column;
+    gap: 2px;
 }
 
 .functions-container{
     display: flex;
-}
-
-.display{
-    height: 50px;
-    border: red solid 1px;
+    gap: 2px;
 }
 
 .main-container {
-    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background-color: rgb(56, 56, 56);
+    width: 250px;
+    height: 310px;
+    padding: 5px;
+    border-radius: 5px;
 }
+
+.do-container *, .functions-container *{
+    flex: 1 0 0%;
+}
+
+.digits-container {
+    flex: 2.5 0 0%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.operator {
+    background-color: orange;
+}
+
+.digit {
+    background-color: rgb(5, 150, 61);
+}
+
+.function {
+    background-color: rgb(38, 77, 250);
+}
+
+.function, .digit, .operator{
+    border: 1px black solid;
+    border-radius: 5px;
+    padding: 15px 0px;
+}
+
+.display{
+    height: 65px;
+    color: white;
+}
+

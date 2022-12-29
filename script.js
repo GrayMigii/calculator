@@ -2,6 +2,8 @@ let state;
 let num_1;
 let num_2;
 let displayContent = '';
+let numbers = [];
+let condition = false;
 
 const display = document.querySelector('.display');
 
@@ -22,6 +24,8 @@ const populateDisplay = () => {
     display.textContent = displayContent;
     digits.forEach( digit => {
         digit.addEventListener('click', (e) => {
+            if(condition) refreshDisplay();
+            condition = false;
             let textContent = e.target.textContent;
             displayContent += textContent;
             display.textContent = displayContent;
@@ -44,34 +48,61 @@ const calculate = (state, a, b) => {
         case 'division':
             return operate(divide, a, b);
     }
-}
+};
+
+populateDisplay();
+
+const clear = document.querySelector('.clear');
+clear.addEventListener('click', () => {
+    refreshDisplay()
+    num_1 = undefined;
+    num_2 = undefined;
+    numbers = [];
+});
 
 const operators = document.querySelectorAll('.operator');
 operators.forEach( operator => {
     operator.addEventListener('click', e => {
-        if(){
-            num_1 = +display.textContent;
-            refreshDisplay();
-            state = e.target.classList.item(0);
+        /*
+        if(numbers.length === 1){
+            num_1 = 
         }else{
-            
+            num_1 = 
+        }*/
+        //num_1 = +display.textContent;
+
+
+        numbers.push(num_1);
+        console.log('numbers',numbers);
+        state = e.target.classList.item(0);
+
+        if(numbers.length === 1) {
+            refreshDisplay();
+        }else{
+            refreshDisplay();
+            console.log('state',state)
+            num_2 = numbers.pop();
+            num_1 = numbers.pop();
+            console.log('numbers after popped',numbers);
+            let result = calculate(state, num_1, num_2);
+            displayContent = result;
+            display.textContent = displayContent;
+            numbers.push(result);
+            console.log('numbers after push',numbers);
+            condition = true;
         }
     });
 });
-
-populateDisplay();
 
 const equals = document.querySelector('.equals');
 equals.addEventListener('click', () => {
     num_2 = +display.textContent;
     refreshDisplay();
+    console.log(num_1,num_2);
     let result = calculate(state, num_1, num_2);
     displayContent = result;
     display.textContent = displayContent;
     state = undefined;
 });
 
-
-
-//when an operator is clicked and if the equals button isn't clicked
 // and two numbers have alredy been chosen the 
