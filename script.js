@@ -49,9 +49,13 @@ const calculate = (state, a, b) => {
 const operators = document.querySelectorAll('.operator');
 operators.forEach( operator => {
     operator.addEventListener('click', e => {
-        num_1 = +display.textContent;
-        refreshDisplay();
-        state = e.target.classList.item(0);
+        if(){
+            num_1 = +display.textContent;
+            refreshDisplay();
+            state = e.target.classList.item(0);
+        }else{
+            
+        }
     });
 });
 
@@ -60,10 +64,14 @@ populateDisplay();
 const equals = document.querySelector('.equals');
 equals.addEventListener('click', () => {
     num_2 = +display.textContent;
-    console.log(num_1, num_2)
-    let result = calculate(state, num_1, num_2);
     refreshDisplay();
+    let result = calculate(state, num_1, num_2);
     displayContent = result;
     display.textContent = displayContent;
     state = undefined;
 });
+
+
+
+//when an operator is clicked and if the equals button isn't clicked
+// and two numbers have alredy been chosen the 
