@@ -61,49 +61,58 @@ clear.addEventListener('click', () => {
     num_2 = undefined;
     state = undefined;
     condition = false;
+    equals = false;
     numbers = [];
 });
+
+let equals = false;
 
 const operators = document.querySelectorAll('.operator');
 operators.forEach( operator => {
     operator.addEventListener('click', e => {
 
-
         // the display shouldn't equal what is on the display if numbers has an item
-        if (numbers.length < 1) {
+        
+        if (equals === false) {
             if(typeof display.textContent === 'string' && display.textContent !== ''){
                 num_1 = +display.textContent;
             }else{
                 num_1 = display.textContent;
             }
-        }else{
-            num_1 = undefined;
         }
-        
+
         if (display.textContent === '') {
             display.textContent = 'ERROR';
         } else {
-            console.log(num_1);
-            if (num_1 !== undefined){
-                numbers.push(num_1);
-            }
+            console.log('num1', num_1);
+
+            numbers.push(num_1);
+
             console.log('numbers',numbers);
-            if(numbers.length === 1) {
+
+            if (equals === true){
+                state = e.target.classList.item(0);
+                equals = false;
+            }
+
+            if (numbers.length === 1) {
                 state = e.target.classList.item(0); // this needs to occur before the if in order for the else block to work after an equals operation
                 refreshDisplay();
-            }else{
+            } else {
                 refreshDisplay();
+
                 console.log('state',state);
+
                 num_2 = numbers.pop();
                 num_1 = numbers.pop();
                 let result = calculate(state, num_1, num_2);
-                console.log(numbers)
                 if(!Number.isInteger(result)){
                     result = Math.round(result * 100) / 100;
                 }
                 displayContent = result;
                 display.textContent = displayContent;
-                numbers.push(result);
+                numbers.push(result); // could potentially cause a problem
+
                 console.log('numbers after push',numbers);
                 condition = true;
                 num_1 = result;
@@ -113,8 +122,9 @@ operators.forEach( operator => {
     });
 });
 
-const equals = document.querySelector('.equals');
-equals.addEventListener('click', () => {
+const equalsBtn = document.querySelector('.equals');
+equalsBtn.addEventListener('click', () => {
+    equals = true;
     if(typeof display.textContent === 'string' && display.textContent !== ''){
         num_2 = +display.textContent;
     }else{
@@ -128,7 +138,9 @@ equals.addEventListener('click', () => {
             display.textContent = 'ERROR';
         }else{
             refreshDisplay();
+
             console.log(num_1,num_2);
+
             let result = calculate(state, num_1, num_2);
             if(!Number.isInteger(result)){
                 result = Math.round(result * 100) / 100;
@@ -136,9 +148,10 @@ equals.addEventListener('click', () => {
             displayContent = result;
             display.textContent = displayContent;
             numbers.pop();
-            numbers.push(result);
+            //numbers.push(result);
             console.log(numbers);
             state = undefined;
+            num_1 = result;
         }
     }
 });
