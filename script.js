@@ -26,9 +26,11 @@ const populateDisplay = () => {
         digit.addEventListener('click', (e) => {
             if(condition) refreshDisplay();
             condition = false;
-            let textContent = e.target.textContent;
-            displayContent += textContent;
-            display.textContent = displayContent;
+            if (!(e.target.classList.item(0) === 'decimal' && display.textContent.includes('.'))) {
+                let textContent = e.target.textContent;
+                displayContent += textContent;
+                display.textContent = displayContent;
+            }
         });
     });
     
