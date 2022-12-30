@@ -67,20 +67,29 @@ clear.addEventListener('click', () => {
 const operators = document.querySelectorAll('.operator');
 operators.forEach( operator => {
     operator.addEventListener('click', e => {
-        if(typeof display.textContent === 'string' && display.textContent !== ''){
-            num_1 = +display.textContent;
+
+
+        // the display shouldn't equal what is on the display if numbers has an item
+        if (numbers.length < 1) {
+            if(typeof display.textContent === 'string' && display.textContent !== ''){
+                num_1 = +display.textContent;
+            }else{
+                num_1 = display.textContent;
+            }
         }else{
-            num_1 = display.textContent;
+            num_1 = undefined;
         }
         
         if (display.textContent === '') {
             display.textContent = 'ERROR';
         } else {
-            numbers.push(num_1);
+            console.log(num_1);
+            if (num_1 !== undefined){
+                numbers.push(num_1);
+            }
             console.log('numbers',numbers);
-
             if(numbers.length === 1) {
-                state = e.target.classList.item(0);
+                state = e.target.classList.item(0); // this needs to occur before the if in order for the else block to work after an equals operation
                 refreshDisplay();
             }else{
                 refreshDisplay();
@@ -88,8 +97,9 @@ operators.forEach( operator => {
                 num_2 = numbers.pop();
                 num_1 = numbers.pop();
                 let result = calculate(state, num_1, num_2);
+                console.log(numbers)
                 if(!Number.isInteger(result)){
-                    result = result.toFixed(2);
+                    result = Math.round(result * 100) / 100;
                 }
                 displayContent = result;
                 display.textContent = displayContent;
@@ -121,10 +131,13 @@ equals.addEventListener('click', () => {
             console.log(num_1,num_2);
             let result = calculate(state, num_1, num_2);
             if(!Number.isInteger(result)){
-                result = result.toFixed(2);
+                result = Math.round(result * 100) / 100;
             }
             displayContent = result;
             display.textContent = displayContent;
+            numbers.pop();
+            numbers.push(result);
+            console.log(numbers);
             state = undefined;
         }
     }
