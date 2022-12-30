@@ -4,6 +4,7 @@ let num_2;
 let displayContent = '';
 let numbers = [];
 let condition = false;
+let equals = false;
 
 const display = document.querySelector('.display');
 
@@ -65,7 +66,11 @@ clear.addEventListener('click', () => {
     numbers = [];
 });
 
-let equals = false;
+const backspace = document.querySelector('.backspace');
+backspace.addEventListener('click', () => {
+    displayContent = display.textContent.slice(0, -1);
+    display.textContent = displayContent;
+});
 
 const operators = document.querySelectorAll('.operator');
 operators.forEach( operator => {
