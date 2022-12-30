@@ -57,52 +57,73 @@ clear.addEventListener('click', () => {
     refreshDisplay()
     num_1 = undefined;
     num_2 = undefined;
+    state = undefined;
+    condition = false;
     numbers = [];
 });
 
 const operators = document.querySelectorAll('.operator');
 operators.forEach( operator => {
     operator.addEventListener('click', e => {
-        /*
-        if(numbers.length === 1){
-            num_1 = 
+        if(typeof display.textContent === 'string' && display.textContent !== ''){
+            num_1 = +display.textContent;
         }else{
-            num_1 = 
-        }*/
-        //num_1 = +display.textContent;
+            num_1 = display.textContent;
+        }
+        
+        if (display.textContent === '') {
+            display.textContent = 'ERROR';
+        } else {
+            numbers.push(num_1);
+            console.log('numbers',numbers);
 
-
-        numbers.push(num_1);
-        console.log('numbers',numbers);
-        state = e.target.classList.item(0);
-
-        if(numbers.length === 1) {
-            refreshDisplay();
-        }else{
-            refreshDisplay();
-            console.log('state',state)
-            num_2 = numbers.pop();
-            num_1 = numbers.pop();
-            console.log('numbers after popped',numbers);
-            let result = calculate(state, num_1, num_2);
-            displayContent = result;
-            display.textContent = displayContent;
-            numbers.push(result);
-            console.log('numbers after push',numbers);
-            condition = true;
+            if(numbers.length === 1) {
+                state = e.target.classList.item(0);
+                refreshDisplay();
+            }else{
+                refreshDisplay();
+                console.log('state',state);
+                num_2 = numbers.pop();
+                num_1 = numbers.pop();
+                let result = calculate(state, num_1, num_2);
+                if(!Number.isInteger(result)){
+                    result = result.toFixed(2);
+                }
+                displayContent = result;
+                display.textContent = displayContent;
+                numbers.push(result);
+                console.log('numbers after push',numbers);
+                condition = true;
+                num_1 = result;
+                state = e.target.classList.item(0);
+            }
         }
     });
 });
 
 const equals = document.querySelector('.equals');
 equals.addEventListener('click', () => {
-    num_2 = +display.textContent;
-    refreshDisplay();
-    console.log(num_1,num_2);
-    let result = calculate(state, num_1, num_2);
-    displayContent = result;
-    display.textContent = displayContent;
-    state = undefined;
-});
+    if(typeof display.textContent === 'string' && display.textContent !== ''){
+        num_2 = +display.textContent;
+    }else{
+        num_2 = display.textContent;
+    }
 
-// and two numbers have alredy been chosen the 
+    if(!(num_1 && num_2) && (num_1 !== 0 && num_2 !== 0)){
+        display.textContent = 'ERROR';
+    }else{
+        if(num_2 === 0 && state === 'division'){
+            display.textContent = 'ERROR';
+        }else{
+            refreshDisplay();
+            console.log(num_1,num_2);
+            let result = calculate(state, num_1, num_2);
+            if(!Number.isInteger(result)){
+                result = result.toFixed(2);
+            }
+            displayContent = result;
+            display.textContent = displayContent;
+            state = undefined;
+        }
+    }
+});
