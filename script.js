@@ -68,8 +68,15 @@ clear.addEventListener('click', () => {
 
 const backspace = document.querySelector('.backspace');
 backspace.addEventListener('click', () => {
-    displayContent = display.textContent.slice(0, -1);
-    display.textContent = displayContent;
+    console.log(equals);
+    if (equals === false){
+        displayContent = display.textContent.slice(0, -1);
+        display.textContent = displayContent;
+    }else{
+        num_1 = +(num_1.toString().slice(0, -1));
+        displayContent = +(displayContent.toString().slice(0, -1));
+        display.textContent = displayContent;
+    }
 });
 
 const operators = document.querySelectorAll('.operator');
