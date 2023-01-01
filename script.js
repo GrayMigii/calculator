@@ -73,8 +73,14 @@ backspace.addEventListener('click', () => {
         displayContent = display.textContent.slice(0, -1);
         display.textContent = displayContent;
     }else{
-        num_1 = +(num_1.toString().slice(0, -1));
-        displayContent = +(displayContent.toString().slice(0, -1));
+        num_1 = num_1.toString().slice(0, -1);
+        if (num_1 !== ''){
+            num_1 = +num_1;
+        }
+        displayContent = displayContent.toString().slice(0, -1);
+        if (displayContent !== ''){
+            displayContent = +displayContent;
+        }
         display.textContent = displayContent;
     }
 });
