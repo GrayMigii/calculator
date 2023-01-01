@@ -69,19 +69,21 @@ clear.addEventListener('click', () => {
 const backspace = document.querySelector('.backspace');
 backspace.addEventListener('click', () => {
     console.log(equals);
-    if (equals === false){
-        displayContent = display.textContent.slice(0, -1);
-        display.textContent = displayContent;
-    }else{
-        num_1 = num_1.toString().slice(0, -1);
-        if (num_1 !== ''){
-            num_1 = +num_1;
+    if (display.textContent !== 'ERROR') {
+        if (equals === false){
+            displayContent = display.textContent.slice(0, -1);
+            display.textContent = displayContent;
+        }else{
+            num_1 = num_1.toString().slice(0, -1);
+            if (num_1 !== ''){
+                num_1 = +num_1;
+            }
+            displayContent = displayContent.toString().slice(0, -1);
+            if (displayContent !== ''){
+                displayContent = +displayContent;
+            }
+            display.textContent = displayContent;
         }
-        displayContent = displayContent.toString().slice(0, -1);
-        if (displayContent !== ''){
-            displayContent = +displayContent;
-        }
-        display.textContent = displayContent;
     }
 });
 
