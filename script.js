@@ -84,6 +84,8 @@ backspace.addEventListener('click', () => {
             }
             display.textContent = displayContent;
         }
+    }else{
+        display.textContent = '';
     }
 });
 
