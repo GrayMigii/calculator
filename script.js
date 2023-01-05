@@ -6,19 +6,29 @@ let numbers = [];
 let condition = false;
 let equals = false;
 
+
+
 const display = document.querySelector('.display');
+
+
 
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
+
+
 const operate = (func, a, b) => func(a, b);
+
+
 
 const refreshDisplay = () => {
     display_content = '';
     display.textContent = display_content;
 };
+
+
 
 const populateDisplay = () => {
     const digits = document.querySelectorAll('.digit');
@@ -41,6 +51,8 @@ const populateDisplay = () => {
     
 };
 
+
+
 const calculate = (state, a, b) => {
     switch (state) {
         case 'addition':
@@ -57,7 +69,11 @@ const calculate = (state, a, b) => {
     }
 };
 
+
+
 populateDisplay();
+
+
 
 const clear = document.querySelector('.clear');
 clear.addEventListener('click', () => {
@@ -69,6 +85,8 @@ clear.addEventListener('click', () => {
     equals = false;
     numbers = [];
 });
+
+
 
 const backspace = document.querySelector('.backspace');
 backspace.addEventListener('click', () => {
@@ -93,6 +111,8 @@ backspace.addEventListener('click', () => {
         display.textContent = '';
     }
 });
+
+
 
 const operators = document.querySelectorAll('.operator');
 operators.forEach( operator => {
@@ -146,6 +166,8 @@ operators.forEach( operator => {
         }
     });
 });
+
+
 
 const equalsBtn = document.querySelector('.equals');
 equalsBtn.addEventListener('click', () => {
