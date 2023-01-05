@@ -1,7 +1,7 @@
 let state;
 let num_1;
 let num_2;
-let displayContent = '';
+let display_content = '';
 let numbers = [];
 let condition = false;
 let equals = false;
@@ -16,21 +16,21 @@ const divide = (a, b) => a / b;
 const operate = (func, a, b) => func(a, b);
 
 const refreshDisplay = () => {
-    displayContent = '';
-    display.textContent = displayContent;
+    display_content = '';
+    display.textContent = display_content;
 };
 
 const populateDisplay = () => {
     const digits = document.querySelectorAll('.digit');
-    display.textContent = displayContent;
+    display.textContent = display_content;
     digits.forEach( digit => {
         digit.addEventListener('click', (e) => {
             if(condition) refreshDisplay();
             condition = false;
             if (!(e.target.classList.item(0) === 'decimal' && display.textContent.includes('.'))) {
                 let textContent = e.target.textContent;
-                displayContent += textContent;
-                display.textContent = displayContent;
+                display_content += textContent;
+                display.textContent = display_content;
             }
             if (equals) {
                 num_1 = +display.textContent;
@@ -75,20 +75,20 @@ backspace.addEventListener('click', () => {
     console.log(equals);
     if (display.textContent !== 'ERROR') {
         if (equals === false){
-            displayContent = display.textContent.slice(0, -1);
-            display.textContent = displayContent;
+            display_content = display.textContent.slice(0, -1);
+            display.textContent = display_content;
         }else{
             num_1 = num_1.toString().slice(0, -1);
             if (num_1 !== ''){
                 num_1 = +num_1;
             }
-            displayContent = displayContent.toString().slice(0, -1);
-            if (displayContent !== ''){
-                displayContent = +displayContent;
+            display_content = display_content.toString().slice(0, -1);
+            if (display_content !== ''){
+                display_content = +display_content;
             }
-            display.textContent = displayContent;
+            display.textContent = display_content;
         }
-        console.log('num_1', num_1, 'display_content',displayContent);
+        console.log('num_1', num_1, 'display_content',display_content);
     }else{
         display.textContent = '';
     }
@@ -136,8 +136,8 @@ operators.forEach( operator => {
                 if(!Number.isInteger(result)){
                     result = Math.round(result * 100) / 100;
                 }
-                displayContent = result;
-                display.textContent = displayContent;
+                display_content = result;
+                display.textContent = display_content;
                 numbers.push(result); // could potentially cause a problem
 
                 console.log('numbers after push',numbers);
@@ -172,8 +172,8 @@ equalsBtn.addEventListener('click', () => {
             if(!Number.isInteger(result)){
                 result = Math.round(result * 100) / 100;
             }
-            displayContent = result;
-            display.textContent = displayContent;
+            display_content = result;
+            display.textContent = display_content;
             numbers.pop();
             //numbers.push(result);
             console.log(numbers);
