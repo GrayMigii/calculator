@@ -97,8 +97,6 @@ backspace.addEventListener('click', () => {
 const operators = document.querySelectorAll('.operator');
 operators.forEach( operator => {
     operator.addEventListener('click', e => {
-
-        // the display shouldn't equal what is on the display if numbers has an item
         
         if (equals === false) {
             if(typeof display.textContent === 'string' && display.textContent !== ''){
@@ -123,7 +121,7 @@ operators.forEach( operator => {
             }
 
             if (numbers.length === 1) {
-                state = e.target.classList.item(0); // this needs to occur before the if in order for the else block to work after an equals operation
+                state = e.target.classList.item(0); 
                 refreshDisplay();
             } else {
                 refreshDisplay();
@@ -138,7 +136,7 @@ operators.forEach( operator => {
                 }
                 display_content = result;
                 display.textContent = display_content;
-                numbers.push(result); // could potentially cause a problem
+                numbers.push(result);
 
                 console.log('numbers after push',numbers);
                 condition = true;
@@ -175,7 +173,6 @@ equalsBtn.addEventListener('click', () => {
             display_content = result;
             display.textContent = display_content;
             numbers.pop();
-            //numbers.push(result);
             console.log(numbers);
             state = undefined;
             num_1 = result;
