@@ -32,6 +32,10 @@ const populateDisplay = () => {
                 displayContent += textContent;
                 display.textContent = displayContent;
             }
+            if (equals) {
+                num_1 = +display.textContent;
+                numbers.pop();
+            }
         });
     });
     
@@ -84,6 +88,7 @@ backspace.addEventListener('click', () => {
             }
             display.textContent = displayContent;
         }
+        console.log('num_1', num_1, 'display_content',displayContent);
     }else{
         display.textContent = '';
     }
